@@ -1,0 +1,772 @@
+{
+  "name": "SemanticModel",
+  "compatibilityLevel": 1500,
+  "model": {
+    "culture": "es-ES",
+    "dataSources": [
+      {
+        "type": "structured",
+        "name": "SQL/pr-hperez;AdventureWorksDW2020-DAX-Docs",
+        "connectionDetails": {
+          "protocol": "tds",
+          "address": {
+            "server": "pr-hperez",
+            "database": "AdventureWorksDW2020-DAX-Docs"
+          },
+          "authentication": null,
+          "query": null
+        },
+        "options": {},
+        "credential": {
+          "AuthenticationKind": "Windows",
+          "Username": "pr-hperez\\hperez",
+          "EncryptConnection": false
+        }
+      }
+    ],
+    "tables": [
+      {
+        "name": "DimCustomer",
+        "columns": [
+          {
+            "name": "CustomerKey",
+            "dataType": "int64",
+            "sourceColumn": "CustomerKey"
+          },
+          {
+            "name": "GeographyKey",
+            "dataType": "int64",
+            "sourceColumn": "GeographyKey"
+          },
+          {
+            "name": "CustomerAlternateKey",
+            "dataType": "string",
+            "sourceColumn": "CustomerAlternateKey"
+          },
+          {
+            "name": "Title",
+            "dataType": "string",
+            "sourceColumn": "Title"
+          },
+          {
+            "name": "FirstName",
+            "dataType": "string",
+            "sourceColumn": "FirstName"
+          },
+          {
+            "name": "MiddleName",
+            "dataType": "string",
+            "sourceColumn": "MiddleName"
+          },
+          {
+            "name": "LastName",
+            "dataType": "string",
+            "sourceColumn": "LastName"
+          },
+          {
+            "name": "NameStyle",
+            "dataType": "boolean",
+            "sourceColumn": "NameStyle"
+          },
+          {
+            "name": "BirthDate",
+            "dataType": "dateTime",
+            "sourceColumn": "BirthDate"
+          },
+          {
+            "name": "MaritalStatus",
+            "dataType": "string",
+            "sourceColumn": "MaritalStatus"
+          },
+          {
+            "name": "Suffix",
+            "dataType": "string",
+            "sourceColumn": "Suffix"
+          },
+          {
+            "name": "Gender",
+            "dataType": "string",
+            "sourceColumn": "Gender"
+          },
+          {
+            "name": "EmailAddress",
+            "dataType": "string",
+            "sourceColumn": "EmailAddress"
+          },
+          {
+            "name": "YearlyIncome",
+            "dataType": "decimal",
+            "sourceColumn": "YearlyIncome"
+          },
+          {
+            "name": "TotalChildren",
+            "dataType": "int64",
+            "sourceColumn": "TotalChildren"
+          },
+          {
+            "name": "NumberChildrenAtHome",
+            "dataType": "int64",
+            "sourceColumn": "NumberChildrenAtHome"
+          },
+          {
+            "name": "EnglishEducation",
+            "dataType": "string",
+            "sourceColumn": "EnglishEducation"
+          },
+          {
+            "name": "EnglishOccupation",
+            "dataType": "string",
+            "sourceColumn": "EnglishOccupation"
+          },
+          {
+            "name": "HouseOwnerFlag",
+            "dataType": "string",
+            "sourceColumn": "HouseOwnerFlag"
+          },
+          {
+            "name": "NumberCarsOwned",
+            "dataType": "int64",
+            "sourceColumn": "NumberCarsOwned"
+          },
+          {
+            "name": "AddressLine1",
+            "dataType": "string",
+            "sourceColumn": "AddressLine1"
+          },
+          {
+            "name": "AddressLine2",
+            "dataType": "string",
+            "sourceColumn": "AddressLine2"
+          },
+          {
+            "name": "Phone",
+            "dataType": "string",
+            "sourceColumn": "Phone"
+          },
+          {
+            "name": "DateFirstPurchase",
+            "dataType": "dateTime",
+            "sourceColumn": "DateFirstPurchase"
+          },
+          {
+            "name": "CommuteDistance",
+            "dataType": "string",
+            "sourceColumn": "CommuteDistance"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/pr-hperez;AdventureWorksDW2020-DAX-Docs\",",
+                "    dbo_DimCustomer = Source{[Schema=\"dbo\",Item=\"DimCustomer\"]}[Data],",
+                "    #\"Removed Columns\" = Table.RemoveColumns(dbo_DimCustomer,{\"SpanishEducation\", \"FrenchEducation\", \"SpanishOccupation\", \"FrenchOccupation\"})",
+                "in",
+                "    #\"Removed Columns\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "DimDate",
+        "dataCategory": "Time",
+        "columns": [
+          {
+            "name": "DateKey",
+            "dataType": "int64",
+            "sourceColumn": "DateKey"
+          },
+          {
+            "name": "FullDateAlternateKey",
+            "dataType": "dateTime",
+            "isKey": true,
+            "sourceColumn": "FullDateAlternateKey"
+          },
+          {
+            "name": "DayNumberOfWeek",
+            "dataType": "int64",
+            "sourceColumn": "DayNumberOfWeek"
+          },
+          {
+            "name": "EnglishDayNameOfWeek",
+            "dataType": "string",
+            "sourceColumn": "EnglishDayNameOfWeek"
+          },
+          {
+            "name": "DayNumberOfMonth",
+            "dataType": "int64",
+            "sourceColumn": "DayNumberOfMonth"
+          },
+          {
+            "name": "DayNumberOfYear",
+            "dataType": "int64",
+            "sourceColumn": "DayNumberOfYear"
+          },
+          {
+            "name": "WeekNumberOfYear",
+            "dataType": "int64",
+            "sourceColumn": "WeekNumberOfYear"
+          },
+          {
+            "name": "EnglishMonthName",
+            "dataType": "string",
+            "sourceColumn": "EnglishMonthName"
+          },
+          {
+            "name": "MonthNumberOfYear",
+            "dataType": "int64",
+            "sourceColumn": "MonthNumberOfYear"
+          },
+          {
+            "name": "CalendarQuarter",
+            "dataType": "int64",
+            "sourceColumn": "CalendarQuarter"
+          },
+          {
+            "name": "CalendarYear",
+            "dataType": "int64",
+            "sourceColumn": "CalendarYear"
+          },
+          {
+            "name": "CalendarSemester",
+            "dataType": "int64",
+            "sourceColumn": "CalendarSemester"
+          },
+          {
+            "name": "FiscalQuarter",
+            "dataType": "int64",
+            "sourceColumn": "FiscalQuarter"
+          },
+          {
+            "name": "FiscalYear",
+            "dataType": "int64",
+            "sourceColumn": "FiscalYear"
+          },
+          {
+            "name": "FiscalSemester",
+            "dataType": "int64",
+            "sourceColumn": "FiscalSemester"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/pr-hperez;AdventureWorksDW2020-DAX-Docs\",",
+                "    dbo_DimDate = Source{[Schema=\"dbo\",Item=\"DimDate\"]}[Data],",
+                "    #\"Removed Columns\" = Table.RemoveColumns(dbo_DimDate,{\"SpanishDayNameOfWeek\", \"FrenchDayNameOfWeek\", \"SpanishMonthName\", \"FrenchMonthName\"})",
+                "in",
+                "    #\"Removed Columns\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "DimGeography",
+        "columns": [
+          {
+            "name": "GeographyKey",
+            "dataType": "int64",
+            "sourceColumn": "GeographyKey"
+          },
+          {
+            "name": "City",
+            "dataType": "string",
+            "sourceColumn": "City"
+          },
+          {
+            "name": "StateProvinceCode",
+            "dataType": "string",
+            "sourceColumn": "StateProvinceCode"
+          },
+          {
+            "name": "StateProvinceName",
+            "dataType": "string",
+            "sourceColumn": "StateProvinceName"
+          },
+          {
+            "name": "CountryRegionCode",
+            "dataType": "string",
+            "sourceColumn": "CountryRegionCode"
+          },
+          {
+            "name": "EnglishCountryRegionName",
+            "dataType": "string",
+            "sourceColumn": "EnglishCountryRegionName"
+          },
+          {
+            "name": "PostalCode",
+            "dataType": "string",
+            "sourceColumn": "PostalCode"
+          },
+          {
+            "name": "SalesTerritoryKey",
+            "dataType": "int64",
+            "sourceColumn": "SalesTerritoryKey"
+          },
+          {
+            "name": "IpAddressLocator",
+            "dataType": "string",
+            "sourceColumn": "IpAddressLocator"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/pr-hperez;AdventureWorksDW2020-DAX-Docs\",",
+                "    dbo_DimGeography = Source{[Schema=\"dbo\",Item=\"DimGeography\"]}[Data],",
+                "    #\"Removed Columns\" = Table.RemoveColumns(dbo_DimGeography,{\"SpanishCountryRegionName\", \"FrenchCountryRegionName\"})",
+                "in",
+                "    #\"Removed Columns\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "DimProduct",
+        "columns": [
+          {
+            "name": "ProductKey",
+            "dataType": "int64",
+            "sourceColumn": "ProductKey"
+          },
+          {
+            "name": "ProductAlternateKey",
+            "dataType": "string",
+            "sourceColumn": "ProductAlternateKey"
+          },
+          {
+            "name": "ProductSubcategoryKey",
+            "dataType": "int64",
+            "sourceColumn": "ProductSubcategoryKey"
+          },
+          {
+            "name": "WeightUnitMeasureCode",
+            "dataType": "string",
+            "sourceColumn": "WeightUnitMeasureCode"
+          },
+          {
+            "name": "SizeUnitMeasureCode",
+            "dataType": "string",
+            "sourceColumn": "SizeUnitMeasureCode"
+          },
+          {
+            "name": "EnglishProductName",
+            "dataType": "string",
+            "sourceColumn": "EnglishProductName"
+          },
+          {
+            "name": "StandardCost",
+            "dataType": "decimal",
+            "sourceColumn": "StandardCost"
+          },
+          {
+            "name": "FinishedGoodsFlag",
+            "dataType": "boolean",
+            "sourceColumn": "FinishedGoodsFlag"
+          },
+          {
+            "name": "Color",
+            "dataType": "string",
+            "sourceColumn": "Color"
+          },
+          {
+            "name": "SafetyStockLevel",
+            "dataType": "int64",
+            "sourceColumn": "SafetyStockLevel"
+          },
+          {
+            "name": "ReorderPoint",
+            "dataType": "int64",
+            "sourceColumn": "ReorderPoint"
+          },
+          {
+            "name": "ListPrice",
+            "dataType": "decimal",
+            "sourceColumn": "ListPrice"
+          },
+          {
+            "name": "Size",
+            "dataType": "string",
+            "sourceColumn": "Size"
+          },
+          {
+            "name": "SizeRange",
+            "dataType": "string",
+            "sourceColumn": "SizeRange"
+          },
+          {
+            "name": "Weight",
+            "dataType": "double",
+            "sourceColumn": "Weight"
+          },
+          {
+            "name": "DaysToManufacture",
+            "dataType": "int64",
+            "sourceColumn": "DaysToManufacture"
+          },
+          {
+            "name": "ProductLine",
+            "dataType": "string",
+            "sourceColumn": "ProductLine"
+          },
+          {
+            "name": "DealerPrice",
+            "dataType": "decimal",
+            "sourceColumn": "DealerPrice"
+          },
+          {
+            "name": "Class",
+            "dataType": "string",
+            "sourceColumn": "Class"
+          },
+          {
+            "name": "Style",
+            "dataType": "string",
+            "sourceColumn": "Style"
+          },
+          {
+            "name": "ModelName",
+            "dataType": "string",
+            "sourceColumn": "ModelName"
+          },
+          {
+            "name": "EnglishDescription",
+            "dataType": "string",
+            "sourceColumn": "EnglishDescription"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "sourceColumn": "EndDate"
+          },
+          {
+            "name": "Status",
+            "dataType": "string",
+            "sourceColumn": "Status"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/pr-hperez;AdventureWorksDW2020-DAX-Docs\",",
+                "    dbo_DimProduct = Source{[Schema=\"dbo\",Item=\"DimProduct\"]}[Data],",
+                "    #\"Removed Columns\" = Table.RemoveColumns(dbo_DimProduct,{\"SpanishProductName\", \"FrenchProductName\", \"FrenchDescription\", \"ChineseDescription\", \"ArabicDescription\", \"HebrewDescription\", \"ThaiDescription\", \"GermanDescription\", \"JapaneseDescription\", \"TurkishDescription\"})",
+                "in",
+                "    #\"Removed Columns\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "DimProductCategory",
+        "columns": [
+          {
+            "name": "ProductCategoryKey",
+            "dataType": "int64",
+            "sourceColumn": "ProductCategoryKey"
+          },
+          {
+            "name": "ProductCategoryAlternateKey",
+            "dataType": "int64",
+            "sourceColumn": "ProductCategoryAlternateKey"
+          },
+          {
+            "name": "EnglishProductCategoryName",
+            "dataType": "string",
+            "sourceColumn": "EnglishProductCategoryName"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/pr-hperez;AdventureWorksDW2020-DAX-Docs\",",
+                "    dbo_DimProductCategory = Source{[Schema=\"dbo\",Item=\"DimProductCategory\"]}[Data],",
+                "    #\"Removed Columns\" = Table.RemoveColumns(dbo_DimProductCategory,{\"SpanishProductCategoryName\", \"FrenchProductCategoryName\"})",
+                "in",
+                "    #\"Removed Columns\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "DimProductSubcategory",
+        "columns": [
+          {
+            "name": "ProductSubcategoryKey",
+            "dataType": "int64",
+            "sourceColumn": "ProductSubcategoryKey"
+          },
+          {
+            "name": "ProductSubcategoryAlternateKey",
+            "dataType": "int64",
+            "sourceColumn": "ProductSubcategoryAlternateKey"
+          },
+          {
+            "name": "EnglishProductSubcategoryName",
+            "dataType": "string",
+            "sourceColumn": "EnglishProductSubcategoryName"
+          },
+          {
+            "name": "ProductCategoryKey",
+            "dataType": "int64",
+            "sourceColumn": "ProductCategoryKey"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/pr-hperez;AdventureWorksDW2020-DAX-Docs\",",
+                "    dbo_DimProductSubcategory = Source{[Schema=\"dbo\",Item=\"DimProductSubcategory\"]}[Data],",
+                "    #\"Removed Columns\" = Table.RemoveColumns(dbo_DimProductSubcategory,{\"SpanishProductSubcategoryName\", \"FrenchProductSubcategoryName\"})",
+                "in",
+                "    #\"Removed Columns\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "FactInternetSales",
+        "columns": [
+          {
+            "name": "SalesOrderNumber",
+            "dataType": "string",
+            "sourceColumn": "SalesOrderNumber"
+          },
+          {
+            "name": "SalesOrderLineNumber",
+            "dataType": "int64",
+            "sourceColumn": "SalesOrderLineNumber"
+          },
+          {
+            "name": "CustomerKey",
+            "dataType": "int64",
+            "sourceColumn": "CustomerKey"
+          },
+          {
+            "name": "ProductKey",
+            "dataType": "int64",
+            "sourceColumn": "ProductKey"
+          },
+          {
+            "name": "OrderDateKey",
+            "dataType": "int64",
+            "sourceColumn": "OrderDateKey"
+          },
+          {
+            "name": "DueDateKey",
+            "dataType": "int64",
+            "sourceColumn": "DueDateKey"
+          },
+          {
+            "name": "ShipDateKey",
+            "dataType": "int64",
+            "sourceColumn": "ShipDateKey"
+          },
+          {
+            "name": "PromotionKey",
+            "dataType": "int64",
+            "sourceColumn": "PromotionKey"
+          },
+          {
+            "name": "CurrencyKey",
+            "dataType": "int64",
+            "sourceColumn": "CurrencyKey"
+          },
+          {
+            "name": "SalesTerritoryKey",
+            "dataType": "int64",
+            "sourceColumn": "SalesTerritoryKey"
+          },
+          {
+            "name": "OrderQuantity",
+            "dataType": "int64",
+            "sourceColumn": "OrderQuantity"
+          },
+          {
+            "name": "UnitPrice",
+            "dataType": "decimal",
+            "sourceColumn": "UnitPrice"
+          },
+          {
+            "name": "ExtendedAmount",
+            "dataType": "decimal",
+            "sourceColumn": "ExtendedAmount"
+          },
+          {
+            "name": "UnitPriceDiscountPct",
+            "dataType": "double",
+            "sourceColumn": "UnitPriceDiscountPct"
+          },
+          {
+            "name": "DiscountAmount",
+            "dataType": "double",
+            "sourceColumn": "DiscountAmount"
+          },
+          {
+            "name": "ProductStandardCost",
+            "dataType": "decimal",
+            "sourceColumn": "ProductStandardCost"
+          },
+          {
+            "name": "TotalProductCost",
+            "dataType": "decimal",
+            "sourceColumn": "TotalProductCost"
+          },
+          {
+            "name": "SalesAmount",
+            "dataType": "decimal",
+            "sourceColumn": "SalesAmount"
+          },
+          {
+            "name": "TaxAmount",
+            "dataType": "decimal",
+            "sourceColumn": "TaxAmount"
+          },
+          {
+            "name": "FreightAmount",
+            "dataType": "decimal",
+            "sourceColumn": "FreightAmount"
+          },
+          {
+            "name": "CarrierTrackingNumber",
+            "dataType": "string",
+            "sourceColumn": "CarrierTrackingNumber"
+          },
+          {
+            "name": "CustomerPONumber",
+            "dataType": "string",
+            "sourceColumn": "CustomerPONumber"
+          },
+          {
+            "name": "RevisionNumber",
+            "dataType": "int64",
+            "sourceColumn": "RevisionNumber"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/pr-hperez;AdventureWorksDW2020-DAX-Docs\",",
+                "    dbo_FactInternetSales = Source{[Schema=\"dbo\",Item=\"FactInternetSales\"]}[Data]",
+                "in",
+                "    dbo_FactInternetSales"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "ce5ef4b4-a648-4c5b-9c1e-149aebc35d90",
+        "fromTable": "FactInternetSales",
+        "fromColumn": "DueDateKey",
+        "toTable": "DimDate",
+        "toColumn": "DateKey",
+        "isActive": false
+      },
+      {
+        "name": "8b67343c-83f9-483a-874a-fb159d06cd98",
+        "fromTable": "FactInternetSales",
+        "fromColumn": "ShipDateKey",
+        "toTable": "DimDate",
+        "toColumn": "DateKey",
+        "isActive": false
+      },
+      {
+        "name": "07925c65-0081-4003-84a8-e0c4ab68930c",
+        "fromTable": "DimCustomer",
+        "fromColumn": "GeographyKey",
+        "toTable": "DimGeography",
+        "toColumn": "GeographyKey"
+      },
+      {
+        "name": "7c8a97bb-e171-4a02-a3e4-63ccfec94f4f",
+        "fromTable": "FactInternetSales",
+        "fromColumn": "CustomerKey",
+        "toTable": "DimCustomer",
+        "toColumn": "CustomerKey"
+      },
+      {
+        "name": "ff8620e1-bbd3-4de9-a931-5f52cb54a7ca",
+        "fromTable": "FactInternetSales",
+        "fromColumn": "OrderDateKey",
+        "toTable": "DimDate",
+        "toColumn": "DateKey"
+      },
+      {
+        "name": "678d4493-0e18-4511-9b0b-b0cf704f81e9",
+        "fromTable": "DimProduct",
+        "fromColumn": "ProductSubcategoryKey",
+        "toTable": "DimProductSubcategory",
+        "toColumn": "ProductSubcategoryKey"
+      },
+      {
+        "name": "fbfa5151-f8d2-4bed-8bd0-36735a083fcc",
+        "fromTable": "FactInternetSales",
+        "fromColumn": "ProductKey",
+        "toTable": "DimProduct",
+        "toColumn": "ProductKey"
+      },
+      {
+        "name": "5cfc38fa-2165-4204-b27a-e2a362af9b13",
+        "fromTable": "DimProductSubcategory",
+        "fromColumn": "ProductCategoryKey",
+        "toTable": "DimProductCategory",
+        "toColumn": "ProductCategoryKey"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "ClientCompatibilityLevel",
+        "value": "600"
+      }
+    ]
+  },
+  "id": "SemanticModel"
+}
