@@ -1595,6 +1595,26 @@
         ]
       }
     ],
+    "roles": [
+      {
+        "name": "Sales Manager",
+        "modelPermission": "read"
+      },
+      {
+        "name": "Sales Analyst US",
+        "modelPermission": "read",
+        "tablePermissions": [
+          {
+            "name": "DimGeography",
+            "filterExpression": "DimGeography[CountryRegionCode] = \"US\""
+          }
+        ]
+      },
+      {
+        "name": "Administrator",
+        "modelPermission": "administrator"
+      }
+    ],
     "annotations": [
       {
         "name": "ClientCompatibilityLevel",
