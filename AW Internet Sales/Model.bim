@@ -1011,6 +1011,359 @@
         "toColumn": "ProductCategoryKey"
       }
     ],
+    "perspectives": [
+      {
+        "name": "Internet Sales",
+        "tables": [
+          {
+            "name": "DimDate",
+            "columns": [
+              {
+                "name": "CalendarQuarter"
+              },
+              {
+                "name": "CalendarSemester"
+              },
+              {
+                "name": "CalendarYear"
+              },
+              {
+                "name": "Date"
+              },
+              {
+                "name": "DateKey"
+              },
+              {
+                "name": "DayNumberOfMonth"
+              },
+              {
+                "name": "DayNumberOfWeek"
+              },
+              {
+                "name": "DayNumberOfYear"
+              },
+              {
+                "name": "DayOfWeek"
+              },
+              {
+                "name": "EnglishDayNameOfWeek"
+              },
+              {
+                "name": "EnglishMonthName"
+              },
+              {
+                "name": "FiscalQuarter"
+              },
+              {
+                "name": "FiscalSemester"
+              },
+              {
+                "name": "FiscalYear"
+              },
+              {
+                "name": "Month Calendar"
+              },
+              {
+                "name": "MonthNumberOfYear"
+              },
+              {
+                "name": "WeekNumberOfYear"
+              }
+            ],
+            "measures": [
+              {
+                "name": "ComparisonQuarterRatio"
+              },
+              {
+                "name": "DaysCurrentQuarterToDate"
+              },
+              {
+                "name": "DaysInCurrentQuarter"
+              }
+            ]
+          },
+          {
+            "name": "DimGeography",
+            "columns": [
+              {
+                "name": "City"
+              },
+              {
+                "name": "CountryRegionCode"
+              },
+              {
+                "name": "EnglishCountryRegionName"
+              },
+              {
+                "name": "GeographyKey"
+              },
+              {
+                "name": "IpAddressLocator"
+              },
+              {
+                "name": "PostalCode"
+              },
+              {
+                "name": "SalesTerritoryKey"
+              },
+              {
+                "name": "StateProvinceCode"
+              },
+              {
+                "name": "StateProvinceName"
+              }
+            ]
+          },
+          {
+            "name": "DimProduct",
+            "columns": [
+              {
+                "name": "Class"
+              },
+              {
+                "name": "Color"
+              },
+              {
+                "name": "DaysToManufacture"
+              },
+              {
+                "name": "DealerPrice"
+              },
+              {
+                "name": "EndDate"
+              },
+              {
+                "name": "EnglishDescription"
+              },
+              {
+                "name": "EnglishProductName"
+              },
+              {
+                "name": "FinishedGoodsFlag"
+              },
+              {
+                "name": "ListPrice"
+              },
+              {
+                "name": "ModelName"
+              },
+              {
+                "name": "ProductAlternateKey"
+              },
+              {
+                "name": "ProductCategoryName"
+              },
+              {
+                "name": "ProductKey"
+              },
+              {
+                "name": "ProductLine"
+              },
+              {
+                "name": "ProductSubcategoryKey"
+              },
+              {
+                "name": "ProductSubCategoryName"
+              },
+              {
+                "name": "ReorderPoint"
+              },
+              {
+                "name": "SafetyStockLevel"
+              },
+              {
+                "name": "Size"
+              },
+              {
+                "name": "SizeRange"
+              },
+              {
+                "name": "SizeUnitMeasureCode"
+              },
+              {
+                "name": "StandardCost"
+              },
+              {
+                "name": "StartDate"
+              },
+              {
+                "name": "Status"
+              },
+              {
+                "name": "Style"
+              },
+              {
+                "name": "Weight"
+              },
+              {
+                "name": "WeightUnitMeasureCode"
+              }
+            ]
+          },
+          {
+            "name": "DimProductCategory",
+            "columns": [
+              {
+                "name": "EnglishProductCategoryName"
+              },
+              {
+                "name": "ProductCategoryAlternateKey"
+              },
+              {
+                "name": "ProductCategoryKey"
+              }
+            ]
+          },
+          {
+            "name": "DimProductSubcategory",
+            "columns": [
+              {
+                "name": "EnglishProductSubcategoryName"
+              },
+              {
+                "name": "ProductCategoryKey"
+              },
+              {
+                "name": "ProductSubcategoryAlternateKey"
+              },
+              {
+                "name": "ProductSubcategoryKey"
+              }
+            ]
+          },
+          {
+            "name": "FactInternetSales",
+            "columns": [
+              {
+                "name": "CarrierTrackingNumber"
+              },
+              {
+                "name": "CurrencyKey"
+              },
+              {
+                "name": "CustomerKey"
+              },
+              {
+                "name": "CustomerPONumber"
+              },
+              {
+                "name": "DiscountAmount"
+              },
+              {
+                "name": "DueDateKey"
+              },
+              {
+                "name": "ExtendedAmount"
+              },
+              {
+                "name": "FreightAmount"
+              },
+              {
+                "name": "Margin"
+              },
+              {
+                "name": "OrderDateKey"
+              },
+              {
+                "name": "OrderQuantity"
+              },
+              {
+                "name": "ProductKey"
+              },
+              {
+                "name": "ProductStandardCost"
+              },
+              {
+                "name": "PromotionKey"
+              },
+              {
+                "name": "RevisionNumber"
+              },
+              {
+                "name": "SalesAmount"
+              },
+              {
+                "name": "SalesOrderLineNumber"
+              },
+              {
+                "name": "SalesOrderNumber"
+              },
+              {
+                "name": "SalesTerritoryKey"
+              },
+              {
+                "name": "ShipDateKey"
+              },
+              {
+                "name": "TaxAmount"
+              },
+              {
+                "name": "TotalProductCost"
+              },
+              {
+                "name": "UnitPrice"
+              },
+              {
+                "name": "UnitPriceDiscountPct"
+              }
+            ],
+            "measures": [
+              {
+                "name": "InternetCurrentQuarterMargin"
+              },
+              {
+                "name": "InternetCurrentQuarterSales"
+              },
+              {
+                "name": "InternetDistinctCountSalesOrder"
+              },
+              {
+                "name": "InternetOrderLinesCount"
+              },
+              {
+                "name": "InternetPreviousQuarterMargin"
+              },
+              {
+                "name": "InternetPreviousQuarterMarginProportionToQTD"
+              },
+              {
+                "name": "InternetPreviousQuarterSales"
+              },
+              {
+                "name": "InternetPreviousQuarterSalesProportionToQTD"
+              },
+              {
+                "name": "InternetTotalDiscountAmount"
+              },
+              {
+                "name": "InternetTotalFreight"
+              },
+              {
+                "name": "InternetTotalMargin"
+              },
+              {
+                "name": "InternetTotalProductCost"
+              },
+              {
+                "name": "InternetTotalSales"
+              },
+              {
+                "name": "InternetTotalTaxAmt"
+              },
+              {
+                "name": "InternetTotalUnits"
+              },
+              {
+                "name": "InternetCurrentQuarterMarginPerformance"
+              },
+              {
+                "name": "InternetCurrentQuarterSalesPerformance"
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "annotations": [
       {
         "name": "ClientCompatibilityLevel",
