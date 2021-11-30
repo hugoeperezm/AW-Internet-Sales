@@ -182,7 +182,7 @@
             "sourceColumn": "DateKey"
           },
           {
-            "name": "FullDateAlternateKey",
+            "name": "Date",
             "dataType": "dateTime",
             "isKey": true,
             "sourceColumn": "FullDateAlternateKey"
@@ -251,6 +251,20 @@
             "name": "FiscalSemester",
             "dataType": "int64",
             "sourceColumn": "FiscalSemester"
+          },
+          {
+            "type": "calculated",
+            "name": "Month Calendar",
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "expression": "RIGHT(\" \" & FORMAT(DimDate[MonthNumberOfYear],\"#0\"),2) & \" - \" & DimDate[EnglishMonthName]"
+          },
+          {
+            "type": "calculated",
+            "name": "DayOfWeek",
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "expression": "RIGHT(\" \" & FORMAT(DimDate[DayNumberOfWeek],\"#0\"),2) & \" - \" & DimDate[EnglishDayNameOfWeek]"
           }
         ],
         "partitions": [
@@ -268,6 +282,20 @@
                 "    #\"Removed Columns\""
               ]
             }
+          }
+        ],
+        "measures": [
+          {
+            "name": "DaysCurrentQuarterToDate",
+            "expression": "COUNTROWS( DATESQTD(DimDate[Date]))"
+          },
+          {
+            "name": "DaysInCurrentQuarter",
+            "expression": "COUNTROWS(DATESBETWEEN( DimDate[Date], STARTOFQUARTER( LASTDATE(DimDate[Date])), ENDOFQUARTER( DimDate[Date])))"
+          },
+          {
+            "name": "ComparisonQuarterRatio",
+            "expression": "[DaysCurrentQuarterToDate]/[DaysInCurrentQuarter]"
           }
         ]
       },
@@ -465,6 +493,20 @@
             "name": "Status",
             "dataType": "string",
             "sourceColumn": "Status"
+          },
+          {
+            "type": "calculated",
+            "name": "ProductSubCategoryName",
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "expression": "RELATED(DimProductSubcategory[EnglishProductSubcategoryName])"
+          },
+          {
+            "type": "calculated",
+            "name": "ProductCategoryName",
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "expression": "RELATED(DimProductCategory[EnglishProductCategoryName])"
           }
         ],
         "partitions": [
@@ -681,6 +723,20 @@
             "name": "RevisionNumber",
             "dataType": "int64",
             "sourceColumn": "RevisionNumber"
+          },
+          {
+            "type": "calculated",
+            "name": "Margin",
+            "dataType": "decimal",
+            "isDataTypeInferred": true,
+            "expression": "FactInternetSales[SalesAmount]-FactInternetSales[TotalProductCost]",
+            "formatString": "\\$ #,0.00;(\\$ #,0.00);\\$ #,0.00",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\" ThousandSeparator=\"True\"><Currency LCID=\"3082\" DisplayName=\"$ Spanish (Spain)\" Symbol=\"$\" PositivePattern=\"2\" NegativePattern=\"14\" /></Format>"
+              }
+            ]
           }
         ],
         "partitions": [
@@ -695,6 +751,200 @@
                 "    dbo_FactInternetSales = Source{[Schema=\"dbo\",Item=\"FactInternetSales\"]}[Data]",
                 "in",
                 "    dbo_FactInternetSales"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "InternetDistinctCountSalesOrder",
+            "expression": "DISTINCTCOUNT([SalesOrderNumber])"
+          },
+          {
+            "name": "InternetOrderLinesCount",
+            "expression": "COUNTA(FactInternetSales[SalesOrderLineNumber])"
+          },
+          {
+            "name": "InternetTotalUnits",
+            "expression": "SUM([OrderQuantity])"
+          },
+          {
+            "name": "InternetTotalDiscountAmount",
+            "expression": "SUM([DiscountAmount])"
+          },
+          {
+            "name": "InternetTotalProductCost",
+            "expression": "SUM([TotalProductCost])",
+            "formatString": "\\$ #,0.00;(\\$ #,0.00);\\$ #,0.00",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\" ThousandSeparator=\"True\"><Currency LCID=\"3082\" DisplayName=\"$ Spanish (Spain)\" Symbol=\"$\" PositivePattern=\"2\" NegativePattern=\"14\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "InternetTotalSales",
+            "expression": "SUM([SalesAmount])",
+            "formatString": "\\$ #,0.00;(\\$ #,0.00);\\$ #,0.00",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\" ThousandSeparator=\"True\"><Currency LCID=\"3082\" DisplayName=\"$ Spanish (Spain)\" Symbol=\"$\" PositivePattern=\"2\" NegativePattern=\"14\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "InternetTotalTaxAmt",
+            "expression": "SUM([TaxAmount])",
+            "formatString": "\\$ #,0.00;(\\$ #,0.00);\\$ #,0.00",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\" ThousandSeparator=\"True\"><Currency LCID=\"3082\" DisplayName=\"$ Spanish (Spain)\" Symbol=\"$\" PositivePattern=\"2\" NegativePattern=\"14\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "InternetTotalMargin",
+            "expression": "SUM([Margin])",
+            "formatString": "\\$ #,0.00;(\\$ #,0.00);\\$ #,0.00",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\" ThousandSeparator=\"True\"><Currency LCID=\"3082\" DisplayName=\"$ Spanish (Spain)\" Symbol=\"$\" PositivePattern=\"2\" NegativePattern=\"14\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "InternetTotalFreight",
+            "expression": "SUM([FreightAmount])",
+            "formatString": "\\$ #,0.00;(\\$ #,0.00);\\$ #,0.00",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\" ThousandSeparator=\"True\"><Currency LCID=\"3082\" DisplayName=\"$ Spanish (Spain)\" Symbol=\"$\" PositivePattern=\"2\" NegativePattern=\"14\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "InternetPreviousQuarterMargin",
+            "expression": "CALCULATE([InternetTotalMargin],PREVIOUSQUARTER(DimDate[Date]))"
+          },
+          {
+            "name": "InternetCurrentQuarterMargin",
+            "expression": "TOTALQTD([InternetTotalMargin], DimDate[Date])"
+          },
+          {
+            "name": "InternetPreviousQuarterMarginProportionToQTD",
+            "expression": "[InternetPreviousQuarterMargin] * ([DaysCurrentQuarterToDate]/[DaysInCurrentQuarter])"
+          },
+          {
+            "name": "InternetPreviousQuarterSales",
+            "expression": "CALCULATE([InternetTotalSales],PREVIOUSQUARTER(DimDate[Date]))"
+          },
+          {
+            "name": "InternetCurrentQuarterSales",
+            "expression": "TOTALQTD([InternetTotalSales], DimDate[Date])"
+          },
+          {
+            "name": "InternetPreviousQuarterSalesProportionToQTD",
+            "expression": "[InternetPreviousQuarterSales] * ([DaysCurrentQuarterToDate]/[DaysInCurrentQuarter])"
+          },
+          {
+            "name": "InternetCurrentQuarterSalesPerformance",
+            "description": "Ventas por trimestre",
+            "expression": "IF(FactInternetSales[InternetPreviousQuarterSalesProportionToQTD]<>0,([InternetCurrentQuarterSales]-[InternetPreviousQuarterSalesProportionToQTD])/[InternetPreviousQuarterSalesProportionToQTD],BLANK())",
+            "kpi": {
+              "description": "Calcula la ejecucion de Ventas trimestrales",
+              "targetDescription": "Valor Absoluto",
+              "targetExpression": "1.1",
+              "statusGraphic": "Shapes",
+              "statusExpression": [
+                "var x='FactInternetSales'[InternetCurrentQuarterSalesPerformance] return",
+                "            if(ISBLANK(x),BLANK(),",
+                "                    If(x<1,-1,",
+                "\t                If(x<1.07,0,1)",
+                "                )",
+                "            )",
+                "            "
+              ],
+              "annotations": [
+                {
+                  "name": "GoalType",
+                  "value": "StaticValue"
+                },
+                {
+                  "name": "KpiStatusType",
+                  "value": "Linear"
+                },
+                {
+                  "name": "KpiThresholdType",
+                  "value": "Absolute"
+                },
+                {
+                  "name": "KpiThresholdOrdering",
+                  "value": "Ascending"
+                },
+                {
+                  "name": "KpiThresholdCount",
+                  "value": "2"
+                },
+                {
+                  "name": "KpiThreshold_0",
+                  "value": "1"
+                },
+                {
+                  "name": "KpiThreshold_1",
+                  "value": "1.07"
+                }
+              ]
+            }
+          },
+          {
+            "name": "InternetCurrentQuarterMarginPerformance",
+            "expression": "IF([InternetPreviousQuarterMarginProportionToQTD]<>0,([InternetCurrentQuarterMargin]-[InternetPreviousQuarterMarginProportionToQTD])/[InternetPreviousQuarterMarginProportionToQTD], BLANK())",
+            "kpi": {
+              "targetExpression": "1.5",
+              "statusGraphic": "Shapes",
+              "statusExpression": [
+                "var x='FactInternetSales'[InternetCurrentQuarterMarginPerformance] return",
+                "            if(ISBLANK(x),BLANK(),",
+                "                    If(x<0.8,-1,",
+                "\t                If(x<1.03,0,1)",
+                "                )",
+                "            )",
+                "            "
+              ],
+              "annotations": [
+                {
+                  "name": "GoalType",
+                  "value": "StaticValue"
+                },
+                {
+                  "name": "KpiStatusType",
+                  "value": "Linear"
+                },
+                {
+                  "name": "KpiThresholdType",
+                  "value": "Absolute"
+                },
+                {
+                  "name": "KpiThresholdOrdering",
+                  "value": "Ascending"
+                },
+                {
+                  "name": "KpiThresholdCount",
+                  "value": "2"
+                },
+                {
+                  "name": "KpiThreshold_0",
+                  "value": "0.8"
+                },
+                {
+                  "name": "KpiThreshold_1",
+                  "value": "1.03"
+                }
               ]
             }
           }
